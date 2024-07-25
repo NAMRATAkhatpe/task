@@ -1,0 +1,406 @@
+*constructor*
+
+
+22-07-2024
+
+1)Non-parameterized/default constructor
+
+
+file save with  Emp_Demo.java(it contains main() method)
+
+import java.util.Scanner;
+
+class Employee 
+{
+	
+	int eid;
+	String name;
+	double salary;
+	 Employee()//non-parameterized constructor/default
+	{
+		eid=101;
+		name="Sam";
+		salary=9876.90;
+		/*Scanner sc=new Scanner (System.in);
+		System.out.println("Enter id ,name & salary");
+		eid=sc.nextInt();
+		name=sc.next();
+		salary=sc.nextDouble();*/
+	}
+	void display()
+	{
+		System.out.println("Emp id="+eid);
+		System.out.println("Name="+name);
+		System.out.println("Salary="+salary);
+		
+	}	
+}
+public class Emp_Demo {
+
+	public static void main(String[] args) 
+	{
+		Employee e1=new Employee();	     
+			e1.display();
+		Employee e2=new Employee();
+	           	e2.display();
+
+	}
+
+}
+
+
+2)Book(bid,baname,author,price)
+
+
+import java.util.Scanner;
+
+class Book
+{
+	
+	int bid;
+	String bname;
+	String author;
+	double price;
+	
+	Book()
+	{
+		bid=101;
+		bname="Sam chi aai";
+		author="XYZ";
+		price=9876.90;
+		/*Scanner sc=new Scanner (System.in);
+		System.out.println("Enter id ,name & salary");
+		eid=sc.nextInt();
+		name=sc.next();
+		salary=sc.nextDouble();*/
+	}
+	void display()
+	{
+		System.out.println("BOOk id="+bid);
+		System.out.println("bName="+bname);
+		System.out.println("Author="+author);
+		System.out.println("Price="+price);
+		
+	}	
+}
+public class book {
+
+	public static void main(String[] args) 
+	{
+	       Book b1=new Book();	     
+			b1.display(); 
+	       Book b2=new Book();	     
+			b2.display(); 
+
+	}
+
+}
+
+
+3)Vehicle(vid,vaname,color,price)
+
+
+import java.util.Scanner;
+
+class Vehicle
+{
+	
+	int vid;
+	String vname;
+	String color;
+	int price;
+	
+	Vehicle()
+	{
+		vid=101;
+		vname="verna";
+		color="Black";
+		price=60000000;
+		/*Scanner sc=new Scanner (System.in);
+		System.out.println("Enter id ,name & salary");
+		eid=sc.nextInt();
+		name=sc.next();
+		salary=sc.nextDouble();*/
+	}
+	void display()
+	{
+		System.out.println("Vehicleid="+vid);
+		System.out.println("vName="+vname);
+		System.out.println("color="+color);
+		System.out.println("Price="+price);
+		
+	}	
+}
+public class vehicle {
+
+	public static void main(String[] args) 
+	{
+	      Vehicle v1=new Vehicle();	     
+			v1.display(); 
+	       Vehicle v2=new Vehicle();	     
+			v2.display(); 
+
+	}
+
+}
+
+
+2)Parameterized constructor
+
+import java.util.Scanner;
+class Employee 
+{
+	int eid;
+	String name;
+	double salary;
+	
+	Employee(int eid,String name,double salary)//parameterized constuctor
+	{
+		this.eid=eid;
+		this.name=name;
+		this.salary=salary;
+	}	
+	void show()
+	{
+		System.out.println("Emp id="+eid);
+		System.out.println("Name="+name);
+		System.out.println("Salary="+salary);
+		
+	}	
+}
+public class Emp_Demo {
+
+	public static void main(String[] args) 
+	{
+		int eid;
+		String name;
+		double salary;
+      	
+		Scanner sc=new Scanner (System.in);
+		System.out.println("Enter id ,name & salary");
+		eid=sc.nextInt();
+		name=sc.next();
+		salary=sc.nextDouble();
+		Employee e2=new Employee(eid,name,salary);
+		e2.show();
+		
+	}
+
+}
+
+
+4)Student(id,name,address,per)
+
+import java.util.Scanner;
+class Student
+{
+	int id;
+	String name;
+	String address;
+	double per;
+	
+	Student(int id,String name,String address,double per)
+	{
+		this.id=id;
+		this.name=name;
+		this.address=address;
+		this.per=per;
+	}	
+	void show()
+	{
+		System.out.println("id="+id);
+		System.out.println("Name="+name);
+		System.out.println("Address="+address);
+		System.out.println("per="+per);
+		
+	}	
+}
+public class student {
+
+	public static void main(String[] args) 
+	{
+		int id;
+		String name;
+		String address;
+		double per;
+      	
+		Scanner sc=new Scanner (System.in);
+		System.out.println("Enter id ,name,address & percentage");
+		id=sc.nextInt();
+		name=sc.next();
+		address=sc.next();
+		per=sc.nextDouble();
+		Student s2=new Student(id,name,address,per);
+		s2.show();
+		
+	}
+
+}
+
+
+5)Area of circle
+import java.util.Scanner;
+public class AreaDemo 
+{
+	double r,A;
+	AreaDemo(double r)
+	{
+		this.r=r;
+	}
+	double cal_area()
+	{
+		A=3.14*r*r;
+		return(A);
+	}
+                    public static void main(String[] args) 
+	{
+		double r,A;
+		Scanner sc =new Scanner (System.in);
+		
+		System.out.println("Enter value of r");
+		r=sc.nextDouble();
+		Area_Demo a1=new Area_Demo(r);
+		A=a1.cal_area();
+		System.out.println("Area="+A);
+	}
+
+}
+
+
+6) Max(int a,int b)
+ import java.util.Scanner;
+    class Max
+ {
+          int a,b;
+             Max()
+ {
+             }
+           a=10;
+            b=5;
+        Max(int a,int b)
+ {
+       this.a=a;
+         this.b=b;
+ }
+ void displayMax(){
+    if(a>b)
+      System.out.println(a+" is Max");
+       else if(b>a)
+     System.out.println(b+" is Min");
+ else
+          System.out.println("Both are equal");
+ }
+ }
+       public class Main{
+   public static void main(String[] args)
+ {
+         Max m=new Max();
+       m.displayMax();
+      int a,b;
+   int n,i;
+      Scanner sc=new Scanner (System.in);
+      System.out.println("Enter no of records");
+       n=sc.nextInt();
+       Max a1[]=new Max[n];//array creation
+ for(i=0;i<n;i++)
+ {
+     System.out.println("Enter two numbers");
+ a=sc.nextInt();
+ b=sc.nextInt();
+ a1[i]=new Max(a,b);
+ a1[i].displayMax();
+ }
+ }
+ }
+
+
+ 7) Factorial(int n)
+ import java.util.Scanner;
+ class Fact
+ {
+ int n;
+ Fact()
+ {
+ }
+ n=5;
+ Fact(int n)
+ {
+this.n=n;
+ }
+        int display(){
+       int f1=1,i;
+      for(i=n;i>=1;i--){
+         f1=f1*i;
+ }
+ return(f1);
+ }
+ }
+ public class Main{
+     public static void main(String[] args)
+ {
+      Fact f=new Fact();
+    System.out.println("Fact="+f.display());
+        int n;
+       int size,i;
+      Scanner sc=new Scanner (System.in);
+      System.out.println("Enter no of records");
+      size=sc.nextInt();
+        Fact a1[]=new Fact[size];//array creation
+        for(i=0;i<size;i++)
+ {
+         System.out.println("Enter a numbers");
+     n=sc.nextInt();
+    a1[i]=new Fact(n);
+        System.out.println("Fact="+a1[i].display());
+ }
+ }
+ }
+
+
+ 8) Palindrome(int n)
+ import java.util.Scanner;
+ class Palindrome
+{
+ int n;
+     Palindrome()
+ {
+        n=5;
+ }
+      Palindrome(int n)
+ {
+      this.n=n;
+ }
+      void display(){
+    int temp=n,sum=0;
+         while(n>0){
+       int digit=n%10;
+          sum=(sum*10)+digit;
+           n/=10;
+ }
+ if(temp==sum)
+         System.out.println("Number is Palindrome");
+ else
+           System.out.println("Number is not Palindrome");
+ }
+ }
+         public class Main{
+    public static void main(String[] args)
+ {
+        Palindrome p=new Palindrome();
+         p.display();
+         int n;
+          int size,i;
+         Scanner sc=new Scanner (System.in);
+         System.out.println("Enter no of records");
+      size=sc.nextInt();
+         Palindrome p1[]=new Palindrome[size];//array creation
+     for(i=0;i<size;i++)
+ {
+       System.out.println("Enter a numbers");
+      n=sc.nextInt();
+         p1[i]=new Palindrome(n);
+     p1[i].display();
+ }
+ }
+ }
+

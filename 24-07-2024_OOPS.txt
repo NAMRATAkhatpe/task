@@ -1,0 +1,763 @@
+MultiLevel Inheritance
+ 1) Area & Volume
+ import java.util.*;
+   class Area
+ {
+      double r,A;
+         Area(double r)
+      {this.r=r;}
+ void cal_area()
+ {
+      A=3.14*r*r;
+       System.out.println("Area="+A);
+ }
+ }
+        class volume extends Area
+ {
+      double h,v;
+      volume(double r,double h)
+ {
+      super(r);
+      this.h=h;
+ }
+          void cal_vol()
+ {
+        cal_area();
+          v=A*h;
+       System.out.println("Volume="+v);
+ }
+ }
+        class volume1 extends volume
+ {
+         double l,v1;
+         volume1(double r,double h,double l)
+ {
+       super(r,h);
+      this.l=l;
+ }
+      void cal_vol1()
+ {
+     cal_vol();
+     v1=v*l;
+    System.out.println("Volume1="+v1);
+ }
+ }
+ publicclassMain
+ {
+ publicstaticvoidmain(String[]args)
+ {
+ doubler,h,l;
+ Scannersc=newScanner(System.in);
+ System.out.println("Enterr&hl");
+ r=sc.nextDouble();
+ h=sc.nextDouble();
+ l=sc.nextDouble();
+ volume1v1=newvolume1(r,h,l);
+ v1.cal_vol1();
+ }
+ }
+ O/P:
+ Enterr&hl
+ 1.5
+ 2
+ 4
+ Area=7.0649999999999995
+ Volume=14.129999999999999
+ Volume1=56.519999999999996
+ 2)Student(id,name)display()
+ Marks(id,name,m1,m2,m3)show(){m1m2m3super.display();}
+ Result(id,name,m1,m2,m3)
+ import java.util.*;
+ classStudent{
+ int id;
+ Stringname;
+ Student(int id,Stringname){
+ this.id=id;
+ this.name=name;
+ }
+ voiddisplay(){
+ System.out.println("ID="+id);
+ System.out.println("Name="+name);
+ }
+ }
+ classMarksextendsStudent{
+ intm1,m2,m3;
+String name;
+ Marks(int id,String name,int m1,int m2,int m3){
+ super(id,name);
+ this.m1=m1;
+ this.m2=m2;
+ this.m3=m3;
+ }
+ void show(){
+ super.display();
+ System.out.println("First subject mark="+m1);
+ System.out.println("Second subject mark="+m2);
+ System.out.println("Third subject mark="+m3);
+ }
+ }
+ class Result extends Marks{
+ int total,per;
+ Result(int id,String name,int m1,int m2,int m3){
+ super(id,name,m1,m2,m3);
+ }
+ int cal_total(){
+ super.show();
+ total=m1+m2+m3;
+ return total;
+ }
+ double cal_per(){
+ per=total/3;
+ return per;
+ }
+ void cal_class(){
+ if(per>=75 && per<=100){
+ System.out.println("Class A");
+ }
+ else if(per>=65 && per<75){
+ System.out.println("Class B");
+ }
+ else if(per>=50 && per<65){
+ System.out.println("Class C");
+ }
+ else if(per>=35 && per<50){
+ System.out.println("Class D");
+ }
+ else{
+ System.out.println("Fail");
+ }
+}
+ }
+ publicclassMain
+ {
+ publicstaticvoidmain(String[]args)
+ {
+ int id,m1,m2,m3;
+ Stringname;
+ Scannersc=newScanner(System.in);
+ System.out.println("Enterstudent id,name,m1,m2,m3");
+ id=sc.nextInt();
+ name=sc.next();
+ m1=sc.nextInt();
+ m2=sc.nextInt();
+ m3=sc.nextInt();
+ Resultr=newResult(id,name,m1,m2,m3);
+ System.out.println("Total="+r.cal_total());
+ System.out.println("Percentage="+r.cal_per());
+ r.cal_class();
+ }
+ }
+ O/P:
+ Enterstudent id,name,m1,m2,m3
+ 12
+ vj
+ 78
+ 54
+ 90
+ ID=12
+ Name=vj
+ Firstsubjectmark=78
+ Secondsubjectmark=54
+ Thirdsubjectmark=90
+ Total=222
+ Percentage=74.0
+ ClassB
+ 3)Writeaprogramformultilevel inheritancesuchthatthecountryisinheritedfromthe
+ continent.Stateisinheritedfromthecountry.Displaytheplace,state,countryand
+ continent.
+ import java.util.*;
+ classContinent{
+ intcontinentId;
+ StringcontinentName;
+double continentArea;
+ Continent(int continentId,String continentName,double continentArea){
+ this.continentId=continentId;
+ this.continentName=continentName;
+ this.continentArea=continentArea;
+ }
+ void displayContinent(){
+ System.out.println("Continent Id:"+continentId);
+ System.out.println("Continent Name:"+continentName);
+ System.out.println("Continent Area:"+continentArea);
+ }
+ }
+ class Country extends Continent{
+ int countryId;
+ String countryName;
+ double countryArea;
+ Country(int continentId,String continentName,double continentArea,int countryId,String
+ countryName,double countryArea){
+ super(continentId,continentName,continentArea);
+ this.countryId=countryId;
+ this.countryName=countryName;
+ this.countryArea=countryArea;
+ }
+ void displayCountry(){
+ super.displayContinent();
+ System.out.println("Country Id:"+countryId);
+ System.out.println("Country Name:"+countryName);
+ System.out.println("Country Area:"+countryArea);
+ }
+ }
+ class State extends Country{
+ int stateId;
+ String stateName,stateLanguage;
+ double stateArea;
+ State(int continentId,String continentName,double continentArea,int countryId,String
+ countryName,double countryArea,int stateId,String stateName,String stateLanguage,double
+ stateArea){
+ super(continentId,continentName,continentArea,countryId,countryName,countryArea);
+ this.stateId=stateId;
+ this.stateName=stateName;
+ this.stateLanguage=stateLanguage;
+ this.stateArea=stateArea;
+ }
+ void displayState(){
+super.displayCountry();
+ System.out.println("State Id:"+stateId);
+ System.out.println("State Name:"+stateName);
+ System.out.println("State Language"+stateLanguage);
+ System.out.println("State Area:"+stateArea);
+ }
+ }
+ class City extends State{
+ int cityId,cityPopulation;
+ String cityName;
+ double cityArea;
+ City(int continentId,String continentName,double continentArea,int countryId,String
+ countryName,double countryArea,int stateId,String stateName,String stateLanguage,double
+ stateArea,int cityId,String cityName,int cityPopulation,double cityArea){
+ super(continentId,continentName,continentArea,countryId,countryName,countryArea,stateId,sta
+ teName,stateLanguage,stateArea);
+ this.cityId=cityId;
+ this.cityName=cityName;
+ this.cityPopulation=cityPopulation;
+ this.cityArea=cityArea;
+ }
+ void displayCity(){
+ super.displayState();
+ System.out.println("City Id:"+cityId);
+ System.out.println("City Name:"+cityName);
+ System.out.println("City Population"+cityPopulation);
+ System.out.println("City Area:"+cityArea);
+ }
+ }
+ class Place extends City{
+ String placeName;
+ double placeArea;
+ Place(int continentId,String continentName,double continentArea,int countryId,String
+ countryName,double countryArea,int stateId,String stateName,String stateLanguage,double
+ stateArea,int cityId,String cityName,int cityPopulation,double cityArea,String placeName,double
+ placeArea){
+ super(continentId,continentName,continentArea,countryId,countryName,countryArea,stateId,sta
+ teName,stateLanguage,stateArea,cityId,cityName,cityPopulation,cityArea);
+ this.placeName=placeName;
+ this.placeArea=placeArea;
+ }
+ void displayPlace(){
+super.displayCity();
+ System.out.println("Place Name:"+placeName);
+ System.out.println("Place Area:"+placeArea);
+ }
+ }
+ public class Main
+ {
+ public static void main(String[] args) {
+ int continentId,countryId,stateId,cityId,cityPopulation;
+ String continentName,countryName,stateName,stateLanguage,cityName,placeName;
+ double continentArea,countryArea,stateArea,cityArea,placeArea;
+ Scanner sc=new Scanner(System.in);
+ System.out.println("Enter Contient Id,Name,Area");
+ continentId=sc.nextInt();
+ continentName=sc.next();
+ continentArea=sc.nextDouble();
+ System.out.println("Enter Country Id,Name,Area");
+ countryId=sc.nextInt();
+ countryName=sc.next();
+ countryArea=sc.nextDouble();
+ System.out.println("Enter State Id,Name,Langugae,Area");
+ stateId=sc.nextInt();
+ stateName=sc.next();
+ stateLanguage=sc.next();
+ stateArea=sc.nextDouble();
+ System.out.println("Enter City Id,Name,Population,Area");
+ cityId=sc.nextInt();
+ cityName=sc.next();
+ cityPopulation=sc.nextInt();
+ cityArea=sc.nextDouble();
+ System.out.println("Enter Place Name,Area");
+ placeName=sc.next();
+ placeArea=sc.nextDouble();
+ Place p=new
+ Place(continentId,continentName,continentArea,countryId,countryName,countryArea,stateId,sta
+ teName,stateLanguage,stateArea,cityId,cityName,cityPopulation,cityArea,placeName,placeArea
+ );
+ p.displayPlace();
+ }
+ }
+ O/P:
+ Enter Contient Id,Name,Area
+ 1,
+ Asia
+12321000
+ Enter Country Id,Name,Area
+ 91
+ India
+ 34210000
+ Enter State Id,Name,Langugae,Area
+ 7
+ Maharashtra
+ Hindi
+ Marathi
+ 231000
+ Enter City Id,Name,Population,Area
+ Solapur
+ Pune 12
+ Pune
+ 7890000
+ 5432100 0
+ Enter Place Name,Area
+ Sa hanivarVada
+ 50
+ Continent Id:1
+ Continent Name:Asia
+ Continent Area:1.2321E7
+ Country Id:91
+ Country Name:India
+ Country Area:3.421E7
+ State Id:7
+ State Name:Maharashtra
+ State LanguageMarathi
+ State Area:231000.0
+ City Id:12
+ City Name:Pune
+ City Population7890000
+ City Area:54320.0
+ Place Name:Shaniwar Wada
+ Place Area:50.0
+ Hierarchical Inheritance
+ 1) Employee(eid,ename,designation)
+ PartTime(n_hr,hr_rate,salary)
+ FullTime(n_day,day_rate,salary)
+ import java.util.Scanner;
+ class Emp
+ {
+ double id;
+ String name,desg;
+Emp(Double id,String name,String desg)
+ {
+ this.id=id;
+ this.name=name;
+ this.desg=desg;
+ }
+ {
+ }
+ }
+ public void display()
+ System.out.println("id:"+id);
+ System.out.println("name :"+name);
+ System.out.println("Designation :"+desg);
+ class part_time extends Emp
+ {
+ double hr_rate,sal;
+ int n_hr;
+ part_time(Double id,String name,String desg,int n_hr,double hr_rate)
+ {
+ super( id,name,desg);
+ this.n_hr=n_hr;
+ this.hr_rate=hr_rate;
+ }
+ public void cal_sal()
+ {
+ System.out.println("No of hr:"+n_hr);
+ System.out.println("Hr rate:"+hr_rate);
+ sal=(n_hr*hr_rate);
+ System.out.println("Salary:"+sal);
+ }
+ }
+ class Full_time extends Emp
+ {
+ double day_rate,sal;
+ int n_day;
+ Full_time(Double id,String name,String desg,int n_day,double day_rate)
+ {
+ super(id,name,desg);
+ this.n_day=n_day;
+ this.day_rate=day_rate;
+ }
+ public void cal_sal()
+{
+ System.out.println("No of hr:"+n_day);
+ System.out.println("Hr rate:"+day_rate);
+ System.out.println("Salary:"+(n_day*day_rate));
+ }
+ }
+ public class Main
+ {
+ public static void main(String[] args)
+ {
+ double id;
+ String name,desg;
+ double hr_rate;
+ int n_hr,ch;
+ double day_rate;
+ int n_day;
+ Scanner sc=new Scanner(System.in);
+ do
+ {
+ System.out.println("1:Accept details of part time empl");
+ System.out.println("2:Accept details of full time empl");
+ System.out.println("3:Exit");
+ System.out.println("enter u r choice");
+ ch = sc.nextInt();
+ switch(ch)
+ {
+ case 1:
+ System.out.println("Enter id,name & desg,n0f hr,hr rate");
+ id=sc.nextDouble();
+ name=sc.next();
+ desg=sc.next();
+ n_hr=sc.nextInt();
+ hr_rate=sc.nextDouble();
+ part_time p1=new part_time(id, name, desg, n_hr, hr_rate);
+ p1.display();
+ p1.cal_sal();
+ break;
+ case 2:
+ System.out.println("Enter id,name & desg,n0f day,day rate");
+ id=sc.nextDouble();
+ name=sc.next();
+ desg=sc.next();
+n_day=sc.nextInt();
+ day_rate=sc.nextDouble();
+ Full_time f1=new Full_time(id, name, desg, n_day, day_rate);
+ f1.display();
+ f1.cal_sal();
+ break;
+ case 3:
+ System.exit(0);
+ break;
+ default:System.out.println("Invalid choice");
+ }
+ }
+ }
+ O/P:
+ }while(ch<=3);
+ 1:Accept details of part time empl
+ 2:Accept details of full time empl
+ 3:Exit
+ enter u r choice
+ 1
+ Enter id,name & desg,n0f hr,hr rate
+ 123
+ vj
+ CEO
+ 2
+ 1500
+ id:123.0
+ name :vj
+ Designation :CEO
+ No of hr:2
+ Hr rate:150.0
+ Salary:300.0
+ 1:Accept details of part time empl
+ 2:Accept details of full time empl
+ 3:Exit
+ enter u r choice
+ 2) Write a Java program to create a superclass Vehicle having members Company and
+ price. Derive 2 different classes LightMotorVehicle (members– mileage) and
+ HeavyMotorVehicle (members– capacity-in-tons). Accept the information for n vehicles
+ and display the information in appropriate form. While taking data, ask the user about the
+ type of vehicle first.(n no of object)
+ import java.util.*;
+ class Vehicle{
+String company;
+ double price;
+ Vehicle(String company,double price){
+ this.company=company;
+ this.price=price;
+ }
+ void display(){
+ System.out.println("Company:"+company);
+ System.out.println("Price:"+price);
+ }
+ }
+ class LightMotorVehicle extends Vehicle{
+ int mileage;
+ LightMotorVehicle(String company,double price,int mileage){
+ super(company,price);
+ this.mileage=mileage;
+ }
+ void show(){
+ super.display();
+ System.out.println("Mileage:"+mileage);
+ }
+ }
+ class HeavyMotorVehicle extends Vehicle{
+ double capacity;
+ HeavyMotorVehicle(String company,double price,double capacity){
+ super(company,price);
+ this.capacity=capacity;
+ }
+ void show(){
+ super.display();
+ System.out.println("Capacity in tons:"+capacity);
+ }
+ }
+ public class Main
+ {
+ public static void main(String[] args) {
+ String company;
+ double price,capacity;
+ int mileage,size,i,ch;
+ Scanner sc=new Scanner(System.in);
+ do{
+ System.out.println("1.Light Motor Vehicle\n2.Heavy Motor Vehicle\n3.Exit");
+ System.out.println("Enter U R choice");
+ch=sc.nextInt();
+ switch(ch){
+ case 1:
+ System.out.println("Enter array size");
+ size=sc.nextInt();
+ LightMotorVehicle[] lv=new LightMotorVehicle[size];
+ for(i=0;i<size;i++){
+ System.out.println("Enter vehicle Company,Price,Mileage");
+ company=sc.next();
+ price=sc.nextDouble();
+ mileage=sc.nextInt();
+ lv[i]=new LightMotorVehicle(company,price,mileage);
+ lv[i].show();
+ }
+ break;
+ case 2:System.out.println("Enter array size");
+ size=sc.nextInt();
+ HeavyMotorVehicle[] hv=new HeavyMotorVehicle[size];
+ for(i=0;i<size;i++){
+ System.out.println("Enter vehicle Company,Price,capacity in tons");
+ company=sc.next();
+ price=sc.nextDouble();
+ capacity=sc.nextDouble();
+ hv[i]=new HeavyMotorVehicle(company,price,capacity);
+ hv[i].show();
+ }
+ break;
+ case 3:System.exit(0);
+ break;
+ default:System.out.println("Invalid type");
+ break;
+ }
+ }while(ch<=3);
+ }
+ }
+ O/P:
+ 1.Light Motor Vehicle
+ 2.Heavy Motor Vehicle
+ 3.Exit
+ Enter U R choice
+ 1
+ Enter array size
+ 2
+ Enter vehicle Company,Price,Mileage
+Honda
+ 120000
+ 55
+ Company:Honda
+ Price:120000.0
+ Mileage:55
+ EntervehicleCompany,Price,Mileage
+ Hero
+ 90000
+ 65
+ Company:Hero
+ Price:90000.0
+ Mileage:65
+ 1.LightMotorVehicle
+ 2.HeavyMotorVehicle
+ 3.Exit
+ EnterURchoice
+ 3
+ 3)WriteaprogramwhichhasclassMovie(title,amount,no_of_ticket) andinherit
+ FollowingclassesTaxedMovie(tax,finalAmount)andTaxFreeMovie(finalAmount).
+ UsecalculateTicketAmount()methodinbothsubclasses.
+ CreateobjectsofTaxedMovieandTaxFreeMovieinthemainclassusingsuperclass
+ referenceprintmoviesinfowithfinalamountforboththeobjects.
+ import java.util.*;
+ classMovie{
+ Stringtitle;
+ doubleamount;
+ intnoOfTicket;
+ Movie(Stringtitle,doubleamount,intnoOfTicket){
+ this.title=title;
+ this.amount=amount;
+ this.noOfTicket=noOfTicket;
+ }
+ voiddisplay(){
+ System.out.println("MovieName:"+title);
+ System.out.println("Amount:"+amount);
+ System.out.println("Numberof tickets:"+noOfTicket);
+ }
+ }
+ classTaxedMovieextendsMovie{
+ doubletax=0.18,finalAmount;
+ TaxedMovie(Stringtitle,doubleamount,intnoOfTicket){
+ super(title,amount,noOfTicket);
+}
+ double total_amt(){
+ super.display();
+ finalAmount=noOfTicket*amount;
+ finalAmount=finalAmount+(finalAmount*tax);
+ return finalAmount;
+ }
+ }
+ class TaxFreeMovie extends Movie{
+ double finalAmount;
+ TaxFreeMovie(String title,double amount,int noOfTicket){
+ super(title,amount,noOfTicket);
+ }
+ double total_amt(){
+ super.display();
+ finalAmount=noOfTicket*amount;
+ return finalAmount;
+ }
+ }
+ public class Main
+ {
+ public static void main(String[] args) {
+ String title;
+ double amount,finalAmount;
+ int noOfTicket,ch;
+ Scanner sc=new Scanner(System.in);
+ do{
+ System.out.println("1.Taxed Movie\n2.Tax Free Movie\n3.Exit");
+ System.out.println("Enter U R choice");
+ ch=sc.nextInt();
+ switch(ch){
+ case 1:System.out.println("Enter Movie name,amount,no of tickets");
+ title=sc.next();
+ amount=sc.nextDouble();
+ noOfTicket=sc.nextInt();
+ TaxedMovie tax=new TaxedMovie(title,amount,noOfTicket);
+ System.out.println("Total amount:"+tax.total_amt());
+ break;
+ case 2:
+ System.out.println("Enter Movie name,amount,no of tickets");
+ title=sc.next();
+ amount=sc.nextDouble();
+ noOfTicket=sc.nextInt();
+ TaxFreeMovie tfm=new TaxFreeMovie(title,amount,noOfTicket);
+System.out.println("Totalamount:"+tfm.total_amt());
+ break;
+ case3:System.exit(0);
+ break;
+ default:System.out.println("Invalidchoice");
+ break;
+ }
+ }while(ch<=3);
+ }
+ }
+ O/P:
+ 1.TaxedMovie
+ 2.TaxFreeMovie
+ 3.Exit
+ EnterURchoice
+ 1
+ EnterMoviename,amount,noof tickets
+ ABCD
+ 100
+ 2
+ MovieName:ABCD
+ Amount:100.0
+ Numberof tickets:2
+ Totalamount:236.0
+ 1.TaxedMovie
+ 2.TaxFreeMovie
+ 3.Exit
+ EnterURchoice
+ 2
+ EnterMoviename,amount,noof tickets
+ PK
+ 120
+ 4
+ MovieName:PK
+ Amount:120.0
+ Numberof tickets:4
+ Totalamount:480.0
+ 1.TaxedMovie
+ 2.TaxFreeMovie
+ 3.Exit
+ EnterURchoice
+ 3
+4) Create an class “order” having members id,description.Create two subclasses
+ “Purchase Order” and “Sales Order” having members vendor name and customer name
+ respectively.Define methods accept and display in all cases. Create 3 objects each of
+ Purchase Order and Sales Order and accept and display details.
+ import java.util.*;
+ class Order {
+ int id;
+ String description;
+ void accept(Scanner sc) {
+ System.out.print("Enter Order ID: ");
+ id = sc.nextInt();
+ sc.nextLine();
+ System.out.print("Enter Order Description: ");
+ description = sc.nextLine();
+ }
+ void display() {
+ System.out.println("Order ID: " + id);
+ System.out.println("Order Description: " + description);
+ }
+ }
+ class PurchaseOrder extends Order {
+ String vendorName;
+ void accept(Scanner sc) {
+ super.accept(sc);
+ System.out.print("Enter Vendor Name: ");
+ vendorName = sc.nextLine();
+ }
+ void display() {
+ super.display();
+ System.out.println("Vendor Name: " + vendorName);
+ }
+ }
+ class SalesOrder extends Order {
+ String customerName;
+ void accept(Scanner sc) {
+ super.accept(sc);
+ System.out.print("Enter Customer Name: ");
+ customerName = sc.nextLine();
+ }
+ void display() {
+super.display();
+ System.out.println("Customer Name: " + customerName);
+ }
+ }
+ public class Main {
+ public static void main(String[] args) {
+ Scanner sc = new Scanner(System.in);
+ PurchaseOrder[] purchaseOrders = new PurchaseOrder[3];
+ SalesOrder[] salesOrders = new SalesOrder[3];
+ System.out.println("Enter details for Purchase Orders:");
+ for (int i = 0; i < 3; i++) {
+ purchaseOrders[i] = new PurchaseOrder();
+ purchaseOrders[i].accept(sc);
+ }
+ System.out.println("\nEnter details for Sales Orders:");
+ for (int i = 0; i < 3; i++) {
+ salesOrders[i] = new SalesOrder();
+ salesOrders[i].accept(sc);
+ }
+ System.out.println("\nDisplaying Purchase Orders:");
+ for (int i = 0; i < 3; i++) {
+ System.out.println("Purchase Order " + (i + 1) + ":");
+ purchaseOrders[i].display();
+ System.out.println();
+ }
+ System.out.println("Displaying Sales Orders:");
+ for (int i = 0; i < 3; i++) {
+ System.out.println("Sales Order " + (i + 1) + ":");
+ salesOrders[i].display();
+ System.out.println();
+ }
+ sc.close();
+ }
+ }
