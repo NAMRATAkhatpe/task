@@ -1,0 +1,504 @@
+1)  Write a class Employee(empId, empName, basicSalary)  implement below methods: 1. default constructor, 2. parameterised constructor, 3. getter-setter, 4. write a method displayEmpInfo to display the employee datils. 5. write a float calsal() method to calculate and return salary. Extends a class FullTimeEmployee(TA, DA, HRA, netSalary) from Employee  implement below methods: 1. default constructor, 2. parameterised constructor, 3. getter-setter, 4. write a method displayEmpInfo to display the (empId, empName, basicSalary, TA, DA, HRA) . 5. Override a float calsal() method to calculate netSalary.   netSalary = basicSalary+TA+DA+HRA Extends a class PartTimeEmployee(TA, perHour , hours, netSalary) from Employee  implement below methods: 1. default constructor, 2. parameterised constructor, 3. getter-setter, 4. write a method displayEmpInfo to display the (empId, empName, TA, perHour , hours) . 5. Override a float calsal() method to calculate netSalary.   netSalary = basicSalary+TA+(perHour*hours) Write a main method and create objects of 3 classes each. call displayEmpInfo and calsal
+
+class Employee {
+    private int empId;
+    private String empName;
+    private float basicSalary;
+
+    public Employee() {
+        this.empId = 0;
+        this.empName = "";
+        this.basicSalary = 0.0f;
+    }
+
+    public Employee(int empId, String empName, float basicSalary) {
+        this.empId = empId;
+        this.empName = empName;
+        this.basicSalary = basicSalary;
+    }
+
+    public int getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(int empId) {
+        this.empId = empId;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public float getBasicSalary() {
+        return basicSalary;
+    }
+
+    public void setBasicSalary(float basicSalary) {
+        this.basicSalary = basicSalary;
+    }
+
+    public void displayEmpInfo() {
+        System.out.println("Employee ID: " + empId);
+        System.out.println("Employee Name: " + empName);
+        System.out.println("Basic Salary: " + basicSalary);
+    }
+
+    public float calsal() {
+        return basicSalary;
+    }
+}
+
+class FullTimeEmployee extends Employee {
+    private float TA;
+    private float DA;
+    private float HRA;
+    private float netSalary;
+
+    public FullTimeEmployee() {
+        super();
+        this.TA = 0.0f;
+        this.DA = 0.0f;
+        this.HRA = 0.0f;
+    }
+
+    public FullTimeEmployee(int empId, String empName, float basicSalary, float TA, float DA, float HRA) {
+        super(empId, empName, basicSalary);
+        this.TA = TA;
+        this.DA = DA;
+        this.HRA = HRA;
+    }
+
+    public float getTA() {
+        return TA;
+    }
+
+    public void setTA(float TA) {
+        this.TA = TA;
+    }
+
+    public float getDA() {
+        return DA;
+    }
+
+    public void setDA(float DA) {
+        this.DA = DA;
+    }
+
+    public float getHRA() {
+        return HRA;
+    }
+
+    public void setHRA(float HRA) {
+        this.HRA = HRA;
+    }
+
+    
+    public void displayEmpInfo() {
+        super.displayEmpInfo();
+        System.out.println("TA: " + TA);
+        System.out.println("DA: " + DA);
+        System.out.println("HRA: " + HRA);
+    }
+
+
+    public float calsal() {
+        netSalary = getBasicSalary() + TA + DA + HRA;
+        return netSalary;
+    }
+}
+
+class PartTimeEmployee extends Employee {
+    private float TA;
+    private float perHour;
+    private int hours;
+    private float netSalary;
+
+    public PartTimeEmployee() {
+        super();
+        this.TA = 0.0f;
+        this.perHour = 0.0f;
+        this.hours = 0;
+    }
+
+    public PartTimeEmployee(int empId, String empName, float basicSalary, float TA, float perHour, int hours) {
+        super(empId, empName, basicSalary);
+        this.TA = TA;
+        this.perHour = perHour;
+        this.hours = hours;
+    }
+
+    public float getTA() {
+        return TA;
+    }
+
+    public void setTA(float TA) {
+        this.TA = TA;
+    }
+
+    public float getPerHour() {
+        return perHour;
+    }
+
+    public void setPerHour(float perHour) {
+        this.perHour = perHour;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+   
+    public void displayEmpInfo() {
+        super.displayEmpInfo();
+        System.out.println("TA: " + TA);
+        System.out.println("Per Hour: " + perHour);
+        System.out.println("Hours: " + hours);
+    }
+
+   
+    public float calsal() {
+        netSalary = getBasicSalary() + TA + (perHour * hours);
+        return netSalary;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        FullTimeEmployee fte1 = new FullTimeEmployee(101, "Alice", 50000, 5000, 4000, 3000);
+        FullTimeEmployee fte2 = new FullTimeEmployee(102, "Bob", 60000, 6000, 5000, 4000);
+        FullTimeEmployee fte3 = new FullTimeEmployee(103, "Charlie", 70000, 7000, 6000, 5000);
+
+        PartTimeEmployee pte1 = new PartTimeEmployee(201, "Dave", 30000, 2000, 100, 20);
+        PartTimeEmployee pte2 = new PartTimeEmployee(202, "Eve", 35000, 2500, 120, 25);
+        PartTimeEmployee pte3 = new PartTimeEmployee(203, "Frank", 40000, 3000, 150, 30);
+        System.out.println("FullTimeEmployee Details:");
+        fte1.displayEmpInfo();
+        System.out.println("Net Salary: " + fte1.calsal());
+        System.out.println();
+        fte2.displayEmpInfo();
+        System.out.println("Net Salary: " + fte2.calsal());
+        System.out.println();
+        fte3.displayEmpInfo();
+        System.out.println("Net Salary: " + fte3.calsal());
+        System.out.println();
+        System.out.println("PartTimeEmployee Details:");
+        pte1.displayEmpInfo();
+        System.out.println("Net Salary: " + pte1.calsal());
+        System.out.println();
+        pte2.displayEmpInfo();
+        System.out.println("Net Salary: " + pte2.calsal());
+        System.out.println();
+        pte3.displayEmpInfo();
+        System.out.println("Net Salary: " + pte3.calsal());
+    }
+}
+
+
+2)   Write class Account(accountNumber, name). implement void displayAccountInfo() which will print accountNumber, name declare methods float getMInimumBalance() return zero, float withdraw(float amount) return zero, float deposite(float amount) return zero inherit SavingAccount(float balance, float minBalance) assign minBalance = 5000 in default as well as param constructor override void displayAccountInfo() which will print accountNumber, name, balance override methods float getMInimumBalance() => returns minBalance value float withdraw(float amount)=> checks balance is greator than amount, and balance is greator than minBalance and performs withdraw operation.           otherwise print error required message.           balance = balance - amount; float deposite(float amount)=> checks amount is greator than zero and non-negative and performs deposite operation.           otherwise print error required message.           balance = balance + amount;                     inherit CurrentAccount(float balance, float minBalance) assign minBalance = 10000 in default as well as param constructor override void displayAccountInfo() which will print accountNumber, name, balance override methods float getMInimumBalance() => returns minBalance value float withdraw(float amount)=> checks balance is greator than amount, and balance is greator than minBalance and performs withdraw operation.           otherwise print error required message.           balance = balance - amount; float deposite(float amount)=> checks amount is greator than zero and non-negative and performs deposite operation.           otherwise print error required message.           balance = balance + amount; 
+
+
+class Account {
+    private String accountNumber;
+    private String name;
+
+    public Account(String accountNumber, String name) {
+        this.accountNumber = accountNumber;
+        this.name = name;
+    }
+
+    public void displayAccountInfo() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Name: " + name);
+    }
+
+    public float getMinimumBalance() {
+        return 0.0f;
+    }
+
+    public float withdraw(float amount) {
+        return 0.0f;
+    }
+
+    public float deposit(float amount) {
+        return 0.0f;
+    }
+}
+
+class SavingAccount extends Account {
+    private float balance;
+    private float minBalance;
+
+    public SavingAccount(String accountNumber, String name) {
+        this(accountNumber, name, 0.0f, 5000.0f);
+    }
+
+    public SavingAccount(String accountNumber, String name, float balance, float minBalance) {
+        super(accountNumber, name);
+        this.balance = balance;
+        this.minBalance = minBalance;
+    }
+
+    public void displayAccountInfo() {
+        super.displayAccountInfo();
+        System.out.println("Balance: " + balance);
+    }
+
+    public float getMinimumBalance() {
+        return minBalance;
+    }
+
+    public float withdraw(float amount) {
+        if (balance >= amount && (balance - amount) >= minBalance) {
+            balance -= amount;
+            return balance;
+        } else {
+            System.out.println("Error: Insufficient balance or below minimum balance requirement.");
+            return balance;
+        }
+    }
+
+    public float deposit(float amount) {
+        if (amount > 0) {
+            balance += amount;
+            return balance;
+        } else {
+            System.out.println("Error: Deposit amount must be greater than zero.");
+            return balance;
+        }
+    }
+}
+
+class CurrentAccount extends Account {
+    private float balance;
+    private float minBalance;
+
+    public CurrentAccount(String accountNumber, String name) {
+        this(accountNumber, name, 0.0f, 10000.0f);
+    }
+
+    public CurrentAccount(String accountNumber, String name, float balance, float minBalance) {
+        super(accountNumber, name);
+        this.balance = balance;
+        this.minBalance = minBalance;
+    }
+
+    public void displayAccountInfo() {
+        super.displayAccountInfo();
+        System.out.println("Balance: " + balance);
+    }
+
+    public float getMinimumBalance() {
+        return minBalance;
+    }
+
+    public float withdraw(float amount) {
+        if (balance >= amount && (balance - amount) >= minBalance) {
+            balance -= amount;
+            return balance;
+        } else {
+            System.out.println("Error: Insufficient balance or below minimum balance requirement.");
+            return balance;
+        }
+    }
+
+    public float deposit(float amount) {
+        if (amount > 0) {
+            balance += amount;
+            return balance;
+        } else {
+            System.out.println("Error: Deposit amount must be greater than zero.");
+            return balance;
+        }
+    }
+}
+
+public class BankSystem {
+    public static void main(String[] args) {
+        SavingAccount savingAccount = new SavingAccount("SA12345", "John Doe", 10000.0f, 5000.0f);
+        CurrentAccount currentAccount = new CurrentAccount("CA67890", "Jane Smith", 20000.0f, 10000.0f);
+
+        System.out.println("Saving Account Info:");
+        savingAccount.displayAccountInfo();
+        System.out.println("After withdrawing 2000:");
+        savingAccount.withdraw(2000.0f);
+        savingAccount.displayAccountInfo();
+        System.out.println("After depositing 5000:");
+        savingAccount.deposit(5000.0f);
+        savingAccount.displayAccountInfo();
+
+        System.out.println("\nCurrent Account Info:");
+        currentAccount.displayAccountInfo();
+        System.out.println("After withdrawing 5000:");
+        currentAccount.withdraw(5000.0f);
+        currentAccount.displayAccountInfo();
+        System.out.println("After depositing 10000:");
+        currentAccount.deposit(10000.0f);
+        currentAccount.displayAccountInfo();
+    }
+}
+
+
+
+3)   Write a  class Shape(PI=3.142) (PI will be final double variable) declare double area() which will return zero method inherit class Circle(radius) from Shape implement area which will return area of a circle inherit class Rectangle(length, breadth)  from Shape implement double area() which will return area of a Rectangle inherit class Cube(height)  from Rectangle implement double area() which will return area of a Cube implement double volume() which will return volume of a Cube create objects of circle, rectangle and cube and test implemented methods
+
+abstract class Shape {
+    public static final double PI = 3.142;
+
+    public double area() {
+        return 0.0;
+    }
+}
+
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public double area() {
+        return PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    private double length;
+    private double breadth;
+
+    public Rectangle(double length, double breadth) {
+        this.length = length;
+        this.breadth = breadth;
+    }
+
+    public double area() {
+        return length * breadth;
+    }
+}
+
+class Cube extends Rectangle {
+    private double height;
+
+    public Cube(double length, double breadth, double height) {
+        super(length, breadth);
+        this.height = height;
+    }
+
+    public double area() {
+        return 2 * (super.area() + (super.length * height) + (super.breadth * height));
+    }
+
+    public double volume() {
+        return super.length * super.breadth * height;
+    }
+}
+
+public class TestShapes {
+    public static void main(String[] args) {
+        Circle circle = new Circle(5);
+        System.out.println("Area of Circle: " + circle.area());
+
+        Rectangle rectangle = new Rectangle(4, 6);
+        System.out.println("Area of Rectangle: " + rectangle.area());
+
+        Cube cube = new Cube(3, 4, 5);
+        System.out.println("Area of Cube: " + cube.area());
+        System.out.println("Volume of Cube: " + cube.volume());
+    }
+}
+
+
+
+4)  Write an  interface Printable and implement it in below classes Employee(id,name,salary), Circle(radius), MyDate(dd,mm,yyyy) Your program should have Shape and rectangle classes which doesn't implements print. In main create objects for employee, circle and date and print the data using "print()"
+
+interface Printable {
+    void print();
+}
+class Employee implements Printable {
+    private int id;
+    private String name;
+    private double salary;
+
+    public Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    
+    public void print() {
+        System.out.println("Employee ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Salary: " + salary);
+    }
+}
+class Circle implements Printable {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+  
+    public void print() {
+        System.out.println("Circle Radius: " + radius);
+        System.out.println("Area: " + (Shape.PI * radius * radius));
+    }
+}
+class MyDate implements Printable {
+    private int dd, mm, yyyy;
+
+    public MyDate(int dd, int mm, int yyyy) {
+        this.dd = dd;
+        this.mm = mm;
+        this.yyyy = yyyy;
+    }
+
+
+    public void print() {
+        System.out.println("Date: " + dd + "/" + mm + "/" + yyyy);
+    }
+}
+abstract class Shape {
+    public static final double PI = 3.142;
+
+    public double area() {
+        return 0.0;
+    }
+}
+class Rectangle extends Shape {
+    private double length;
+    private double breadth;
+
+    public Rectangle(double length, double breadth) {
+        this.length = length;
+        this.breadth = breadth;
+    }
+
+   
+    public double area() {
+        return length * breadth;
+    }
+}
+public class TestPrintable {
+    public static void main(String[] args) {
+        Employee employee = new Employee(1, "John Doe", 50000);
+        Circle circle = new Circle(5);
+        MyDate myDate = new MyDate(6, 8, 2024);
+
+        employee.print();
+        System.out.println();
+        circle.print();
+        System.out.println();
+        myDate.print();
+    }
+}
+
+

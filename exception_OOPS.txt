@@ -1,0 +1,599 @@
+Write a java program to accept a number from the user, if number is less than zero then throw user defined Exception “Number is 0” otherwise calculate the sum of first and last digit of a given number
+
+
+
+import java.util.*;
+class ZeroException extends Exception
+{	public String toString()
+	{
+		return "no is less than or equal to 0";
+	}
+}
+
+
+public class UserDefine 
+{
+	public static void main(String[] args) 
+	{
+		int n,first=0,last,sum=0;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter 1 no");
+		n=sc.nextInt();
+		try
+		{
+		if(n<=0)
+		{
+			throw new ZeroException ();
+		}
+		else
+		{
+			last=n%10;
+			while(n>0)
+			{
+				first=n;
+				n=n/10;
+				
+			}
+			sum=first+last;
+			System.out.println("Sum="+sum);
+		}
+		}//end try
+		catch(ZeroException e)
+		{
+			System.out.println(e);
+		}
+}
+}
+
+
+2)Accept name from user chq whether is valid or not using Exception handling
+import java.util.*;
+
+class NameException extends Exception
+{
+	public String toString()
+	{
+		return "name is invalid";
+	}
+}
+public class UserDefine1 
+{
+	public static void main(String[] args) 
+	{
+		int cnt=0;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter name");
+		String s1=sc.next();
+		try
+		{
+		for(int i=0;i<s1.length();i++)
+		{
+			char ch=s1.charAt(i);
+			if((ch>='a' && ch<='z')||(ch>='A' && ch<='Z'))
+			{
+				cnt++;
+			}
+			else
+			{
+				throw new NameException();
+			}
+		}	
+		
+		}
+		catch(NameException e)
+		{
+			System.out.println(e);
+		}
+        if(cnt==s1.length())
+		{
+			System.out.println("name is valid");
+		}
+
+		
+	}
+}
+
+
+3 Create a class Student with attributes rollno, name, age and course. Initialize values through parameterized constructor. If age of student is not in between 15 and 21 then generate user-defined exception “AgeNotWithinRangeException”. If name contains numbers or special symbols raise exception “NameNotValidException”. Define the two exception classes.
+
+
+class AgeNotWithinRangeException extends Exception {
+    public AgeNotWithinRangeException(String message) {
+        super(message);
+    }
+}
+
+class NameNotValidException extends Exception {
+    public NameNotValidException(String message) {
+        super(message);
+    }
+}
+
+class Student {
+    private int rollno;
+    private String name;
+    private int age;
+    private String course;
+
+    public Student(int rollno, String name, int age, String course) throws AgeNotWithinRangeException, NameNotValidException {
+        this.rollno = rollno;
+        setName(name); 
+        setAge(age);           this.course = course;
+    }
+
+    private void setAge(int age) throws AgeNotWithinRangeException {
+        if (age < 15 || age > 21) {
+            throw new AgeNotWithinRangeException("Age must be between 15 and 21.");
+        }
+        this.age = age;
+    }
+
+    private void setName(String name) throws NameNotValidException {
+        if (!name.matches("[a-zA-Z ]+")) {
+            throw new NameNotValidException("Name must contain only letters and spaces.");
+        }
+        this.name = name;
+    }
+
+    public String toString() {
+        return "Student [Roll No: " + rollno + ", Name: " + name + ", Age: " + age + ", Course: " + course + "]";
+    }
+}
+
+public class StudentTest {
+    public static void main(String[] args) {
+        try {
+            Student student1 = new Student(1, "John Doe", 18, "Computer Science");
+            System.out.println(student1);
+
+            Student student2 = new Student(2, "Jane Smith", 22, "Mathematics");
+        } catch (AgeNotWithinRangeException | NameNotValidException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+
+        try {
+            Student student3 = new Student(3, "Mike123", 20, "Physics");
+        } catch (AgeNotWithinRangeException | NameNotValidException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
+
+4) Define Exceptions VowelException ,BlankException, ExitException. Write another class Test which reads a character. If it is a vowel, throw VowelException,if it is blank throw BlankException and for a character 'X' throw an ExitException and terminate program. For any other character, display “Valid character”.
+
+
+import java.util.Scanner;
+
+class VowelException extends Exception {
+    public VowelException(String message) {
+        super(message);
+    }
+}
+
+class BlankException extends Exception {
+    public BlankException(String message) {
+        super(message);
+    }
+}
+
+class ExitException extends Exception {
+    public ExitException(String message) {
+        super(message);
+    }
+}
+
+public class Test {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a character: ");
+        char inputChar = scanner.next().charAt(0);
+
+        try {
+            if (inputChar == 'X') {
+                throw new ExitException("Program terminated by ExitException");
+            }
+            
+            if (Character.isWhitespace(inputChar)) {
+                throw new BlankException("Blank space detected");
+            }
+            
+            if (isVowel(inputChar)) {
+                throw new VowelException("Vowel detected");
+            }
+
+            System.out.println("Valid character");
+
+        } catch (VowelException | BlankException | ExitException e) {
+            System.out.println("Exception: " + e.getMessage());
+            if (e instanceof ExitException) {
+                System.exit(0);
+            }
+        }
+    }
+
+    private static boolean isVowel(char c) {
+        c = Character.toLowerCase(c);
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+}
+
+
+
+5) Define class MyDate with members day, month, year. Define default and 
+parameterized constructors. create a date object. Throw user defined exceptions – “InvalidDayException” or 
+“InvalidMonthException” if the day and month are invalid. If the date is valid, display message “Valid date”
+class DayException extends Exception
+{
+	public String toString()
+	{
+		return "Day is not valid";
+	}
+}
+
+class YearException extends Exception
+{
+	public String toString()
+	{
+		return "Year is invalid";
+	}
+}
+
+import java.util.Scanner;
+public class Date1 {
+	public static void main(String[] args) 
+	{
+		int m,d,y;		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter day month year");
+		d=sc.nextInt();
+		m=sc.nextInt();
+		y=sc.nextInt();
+try
+{
+		if(y>=1000 &&y<=9999)
+		{
+			if(m>=1&&m<=12)
+			{
+			
+				if(d>=1 &&d<=31)
+				{
+				  	switch(m)
+					{
+					case 1:case 3:case 5:case 7:case 8:case 10:case 12:
+				//CW("{0}-{1}-{2} is valid",d,m,y);	
+				System.out.println(d+"-"+m+"-"+y+ "   Valid date");
+						break;
+					case 4:case 6:case 9:case 11:
+						if(d<=30)						
+							System.out.println(d+"-"+m+"-"+y+ "   Valid date");						
+						else
+							System.out.println(d+"-"+m+"-"+y+ "   inValid date");
+						break;
+						
+					case 2:
+						if(y%4==0 && d<=29)
+							System.out.println(d+"-"+m+"-"+y+ "   Valid date");
+						else if(d<=28)
+							System.out.println(d+"-"+m+"-"+y+ "   Valid date");
+						else
+						System.out.println(d+"-"+m+"-"+y+ "   inValid date");
+						break;
+					default:break;												
+					}	
+				
+											
+				}
+				else
+				{
+					Throw new DayException();
+;
+				}						
+						
+			}
+			else
+			{
+				Throw new MonthException();
+			}			
+			
+		}
+		else
+		{
+			Throw new YearException();
+		}		
+		
+}
+Catch(YearException e)
+{
+SOP(e);
+}
+
+	}
+
+}
+
+
+6)Write a program which accept two integers and an arithmetic operator from the 
+user  and performs the operation. Fire the following user defined exceptions: 
+i. If the no of arguments are less than 3 then fire “IllegalNumberOfArguments” 
+ii. If the operator is not an Arithmetic operator, throw “InvalidOperatorException”. 
+iii. If result is –ve, then throw “NegativeResultException”
+
+
+import java.util.Scanner;
+
+class IllegalNumberOfArguments extends Exception {
+    public IllegalNumberOfArguments(String message) {
+        super(message);
+    }
+}
+
+class InvalidOperatorException extends Exception {
+    public InvalidOperatorException(String message) {
+        super(message);
+    }
+}
+
+class NegativeResultException extends Exception {
+    public NegativeResultException(String message) {
+        super(message);
+    }
+}
+
+public class ArithmeticOperation {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter first integer: ");
+        int num1 = scanner.nextInt();
+        System.out.print("Enter second integer: ");
+        int num2 = scanner.nextInt();
+        System.out.print("Enter arithmetic operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+
+        try {
+            if (operator != '+' && operator != '-' && operator != '*' && operator != '/') {
+                throw new InvalidOperatorException("Invalid operator. Please use +, -, *, or /.");
+            }
+
+            int result = performOperation(num1, num2, operator);
+
+                        if (result < 0) {
+                throw new NegativeResultException("The result is negative.");
+            }
+
+            
+            System.out.println("Result: " + result);
+
+        } catch (IllegalNumberOfArguments e) {
+            System.out.println("Exception: " + e.getMessage());
+        } catch (InvalidOperatorException e) {
+            System.out.println("Exception: " + e.getMessage());
+        } catch (NegativeResultException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+
+    private static int performOperation(int num1, int num2, char operator) throws IllegalNumberOfArguments {
+        if (num2 == 0 && operator == '/') {
+            throw new IllegalNumberOfArguments("Division by zero is not allowed.");
+        }
+
+        int result;
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                result = num1 / num2;
+                break;
+            default:
+                throw new InvalidOperatorException("Invalid operator. Please use +, -, *, or /.");
+        }
+        return result;
+    }
+}
+
+7)Define a class which contains method “DisplayColor” which takes one character as argument. Raise an error if the character is not an alphabet. If the alphabet is a color of the rainbow, display the color name. If it is any other alphabet, report an error. Use
+
+class NonAlphabetException extends Exception {
+    public NonAlphabetException(String message) {
+        super(message);
+    }
+}
+
+class InvalidColorException extends Exception {
+    public InvalidColorException(String message) {
+        super(message);
+    }
+}
+
+public class RainbowColor {
+
+    public static void main(String[] args) {
+        RainbowColor colorDisplay = new RainbowColor();
+
+        try {
+            colorDisplay.DisplayColor('R');  
+           colorDisplay.DisplayColor('G');
+            colorDisplay.DisplayColor('X'); 
+            colorDisplay.DisplayColor('1'); 
+        } catch (NonAlphabetException | InvalidColorException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+
+    public void DisplayColor(char c) throws NonAlphabetException, InvalidColorException {
+        if (!Character.isLetter(c)) {
+            throw new NonAlphabetException("Input is not an alphabet.");
+        }
+
+        c = Character.toUpperCase(c);
+
+        switch (c) {
+            case 'R':
+                System.out.println("Red");
+                break;
+            case 'O':
+                System.out.println("Orange");
+                break;
+            case 'Y':
+                System.out.println("Yellow");
+                break;
+            case 'G':
+                System.out.println("Green");
+                break;
+            case 'B':
+                System.out.println("Blue");
+                break;
+            case 'I':
+                System.out.println("Indigo");
+                break;
+            case 'V':
+                System.out.println("Violet");
+                break;
+            default:
+                throw new InvalidColorException("The alphabet does not correspond to a rainbow color.");
+        }
+    }
+}
+
+8) Define class EmailId with members ,username and password. Define default and parameterized constructors. Accept values from user throw defined exceptions – “InvalidUsernameException” or “InvalidPasswordException” if the username and password are invalid.
+If(uname.equals(“”)||!(uname.equals(“admin”)))
+
+import java.util.Scanner;
+
+class InvalidUsernameException extends Exception {
+    public InvalidUsernameException(String message) {
+        super(message);
+    }
+}
+
+class InvalidPasswordException extends Exception {
+    public InvalidPasswordException(String message) {
+        super(message);
+    }
+}
+
+public class EmailId {
+    private String username;
+    private String password;
+
+    
+    public EmailId() {
+        this.username = "";
+        this.password = "";
+    }
+
+    public EmailId(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
+        setUsername(username);
+        setPassword(password);
+    }
+
+    public void setUsername(String username) throws InvalidUsernameException {
+        if (username.equals("") || !username.equals("admin")) {
+            throw new InvalidUsernameException("Invalid username. It must be 'admin'.");
+        }
+        this.username = username;
+    }
+
+    public void setPassword(String password) throws InvalidPasswordException {
+        if (password.length() < 6) {
+            throw new InvalidPasswordException("Invalid password. It must be at least 6 characters long.");
+        }
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Username: " + username + ", Password: " + password;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
+
+            EmailId emailId = new EmailId(username, password);
+            System.out.println("EmailId created successfully: " + emailId);
+
+        } catch (InvalidUsernameException | InvalidPasswordException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
+
+
+9) Define a class patient (patient_name, patient_age, patient_oxy_level,patient_HRCT_report). Create an object of patient. Handle appropriate exception while patient oxygen level less than 95% and HRCT scan report greater than 10, then throw user defined Exception “Patient is Covid Positive(+) and Need to Hospitalized” otherwise display its information.
+
+
+import java.util.Scanner;
+
+class CovidPositiveException extends Exception {
+    public CovidPositiveException(String message) {
+        super(message);
+    }
+}
+
+public class Patient {
+    private String patientName;
+    private int patientAge;
+    private double patientOxyLevel;
+    private int patientHRCTReport;
+
+    public Patient(String patientName, int patientAge, double patientOxyLevel, int patientHRCTReport) {
+        this.patientName = patientName;
+        this.patientAge = patientAge;
+        this.patientOxyLevel = patientOxyLevel;
+        this.patientHRCTReport = patientHRCTReport;
+    }
+
+    public void checkCondition() throws CovidPositiveException {
+        if (patientOxyLevel < 95 && patientHRCTReport > 10) {
+            throw new CovidPositiveException("Patient is Covid Positive(+) and Needs to be Hospitalized.");
+        }
+    }
+
+    public String toString() {
+        return "Patient Name: " + patientName + ", Age: " + patientAge + ", Oxygen Level: " + patientOxyLevel + "%, HRCT Report: " + patientHRCTReport;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter patient name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter patient age: ");
+        int age = scanner.nextInt();
+
+        System.out.print("Enter patient oxygen level (%): ");
+        double oxyLevel = scanner.nextDouble();
+
+        System.out.print("Enter patient HRCT report score: ");
+        int hrctReport = scanner.nextInt();
+
+        Patient patient = new Patient(name, age, oxyLevel, hrctReport);
+
+        try {
+            patient.checkCondition();
+            System.out.println(patient);
+        } catch (CovidPositiveException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
+

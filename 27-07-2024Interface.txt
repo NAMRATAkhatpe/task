@@ -1,0 +1,947 @@
+*********************Interface***************************************
+
+1)
+interface Bank
+{  
+abstract float rateOfInterest();
+  }  
+class SBI implements Bank
+{  
+public float rateOfInterest()
+{
+return 9.15f;
+}  
+}  
+class PNB implements Bank
+{  
+public float rateOfInterest()
+{
+return 9.7f;
+}  
+}  
+class TestInterface2
+{  
+public static void main(String[] args)
+{  
+Bank b=new SBI();  
+System.out.println("ROI: "+b.rateOfInterest()); 
+PNB b1=new PNB();  
+System.out.println("ROI: "+b1.rateOfInterest());  
+}
+}
+
+2)Define an interface “IntOperations” with methods to check whether an integer is positive_negative, even_odd, prime and operations like factorial and sum of digits. Define a class MyNumber having one private int data member. Write a default constructor to initialize it to 0 and another constructor to initialize it to a value (Use this). Implement the above interface. Create an object in main.
+
+
+public interface IntOperations {
+    boolean isPositive();
+    boolean isNegative();
+    boolean isEven();
+    boolean isOdd();
+    boolean isPrime();
+    long factorial();
+    int sumOfDigits();
+}
+public class MyNumber implements IntOperations {
+    private int data;
+
+
+    public MyNumber() {
+        this.data = 0;
+    }
+
+    
+    public MyNumber(int data) {
+        this.data = data;
+    }
+
+
+    public boolean isPositive() {
+        return data > 0;
+    }
+
+   
+    public boolean isNegative() {
+        return data < 0;
+    }
+
+ 
+    public boolean isEven() {
+        return data % 2 == 0;
+    }
+
+
+    public boolean isOdd() {
+        return data % 2 != 0;
+    }
+
+
+    public boolean isPrime() {
+        if (data <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(data); i++) {
+            if (data % i == 0) return false;
+        }
+        return true;
+    }
+
+  
+    public long factorial() {
+        if (data < 0) throw new IllegalArgumentException("Factorial is not defined for negative numbers");
+        long result = 1;
+        for (int i = 1; i <= data; i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    public int sumOfDigits() {
+        int sum = 0;
+        int number = Math.abs(data);
+        while (number > 0) {
+            sum += number % 10;
+            number /= 10;
+        }
+        return sum;
+    }
+    public int getData() {
+        return data;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        MyNumber myNumber = new MyNumber(7);
+
+        System.out.println("Number: " + myNumber.getData());
+        System.out.println("Is Positive: " + myNumber.isPositive());
+        System.out.println("Is Negative: " + myNumber.isNegative());
+        System.out.println("Is Even: " + myNumber.isEven());
+        System.out.println("Is Odd: " + myNumber.isOdd());
+        System.out.println("Is Prime: " + myNumber.isPrime());
+        System.out.println("Factorial: " + myNumber.factorial());
+        System.out.println("Sum of Digits: " + myNumber.sumOfDigits());
+    }
+}
+
+
+3)Define an Interface Shape with abstract method area(). Write a java program to calculate an area of Circle and Sphere.(use final keyword)	
+
+public interface Shape {
+    double area();
+}
+public class Circle implements Shape {
+    private final double radius; 
+
+   
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    public double area() {
+        return Math.PI * radius * radius; 
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+}
+public class Sphere implements Shape {
+    private final double radius;
+   
+    public Sphere(double radius) {
+        this.radius = radius;
+    }
+
+    public double area() {
+        return 4 * Math.PI * radius * radius; 
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape circle = new Circle(5.0);
+        System.out.println("Circle Area: " + circle.area());
+        Shape sphere = new Sphere(5.0);
+        System.out.println("Sphere Area: " + sphere.area());
+    }
+}
+
+
+
+4)   Define an interface “Operation” which has methods area(),volume().Define a constant PI having a value 3.142.Create a class cylinder which implements this interface (members – radius, height) Create n object and calculate the area and volume.
+
+
+
+public interface Operation {
+    double PI = 3.142;
+    double area();
+    double volume();
+}
+public class Cylinder implements Operation {
+    private final double radius;
+    private final double height;
+
+    public Cylinder(double radius, double height) {
+        this.radius = radius;
+        this.height = height;
+    }
+    public double area() {
+        return 2 * PI * radius * (radius + height); 
+    }
+    public double volume() {
+        return PI * radius * radius * height; 
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Cylinder cylinder1 = new Cylinder(3.0, 5.0);
+        Cylinder cylinder2 = new Cylinder(4.0, 7.0);
+
+        System.out.println("Cylinder 1:");
+        System.out.println("Radius: " + cylinder1.getRadius());
+        System.out.println("Height: " + cylinder1.getHeight());
+        System.out.println("Surface Area: " + cylinder1.area());
+        System.out.println("Volume: " + cylinder1.volume());
+
+        System.out.println("\nCylinder 2:");
+        System.out.println("Radius: " + cylinder2.getRadius());
+        System.out.println("Height: " + cylinder2.getHeight());
+        System.out.println("Surface Area: " + cylinder2.area());
+        System.out.println("Volume: " + cylinder2.volume());
+    }
+}
+
+
+5) Write a program to using marker interface create a class product(product_id, product_name, product_cost, product_quantity) define a default and parameterized constructor. Create objects of class product and display the contents of each object 
+
+
+public interface Marker {
+
+}
+public class Product implements Marker {
+    private int productId;
+    private String productName;
+    private double productCost;
+    private int productQuantity;
+    public Product() {
+        this.productId = 0;
+        this.productName = "Unknown";
+        this.productCost = 0.0;
+        this.productQuantity = 0;
+    }
+
+    public Product(int productId, String productName, double productCost, int productQuantity) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productCost = productCost;
+        this.productQuantity = productQuantity;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public double getProductCost() {
+        return productCost;
+    }
+
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void display() {
+        System.out.println("Product ID: " + productId);
+        System.out.println("Product Name: " + productName);
+        System.out.println("Product Cost: " + productCost);
+        System.out.println("Product Quantity: " + productQuantity);
+        System.out.println(); 
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Product product1 = new Product();
+        Product product2 = new Product(101, "Laptop", 999.99, 10);
+        Product product3 = new Product(102, "Smartphone", 499.99, 25);
+
+        System.out.println("Product 1 Details:");
+        product1.display();
+
+        System.out.println("Product 2 Details:");
+        product2.display();
+
+        System.out.println("Product 3 Details:");
+        product3.display();
+    }
+}
+
+6)Write a program to find the cube of given number using function interface
+interface cube
+{
+abstract void cube1();
+}
+
+import java.util.Scanner;
+
+interface Cube {
+    void cube1(int number);
+}
+
+class CubeCalculator implements Cube {
+    public void cube1(int number) {
+        int result = number * number * number;
+        System.out.println("The cube of " + number + " is: " + result);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        CubeCalculator calculator = new CubeCalculator();
+        calculator.cube1(number);
+
+        scanner.close();
+    }
+}
+
+
+7)Define an interface “StackOperations” which declares methods for a static stack. Define a class “MyStack” which contains an array and top as data members and implements the above interface. Initialize the stack using a constructor. Write a menu driven program to perform operations on a stack object.
+
+import java.util.Scanner;
+
+interface StackOperations {
+    void push(int item);
+    int pop();
+    void display();
+}
+
+class MyStack implements StackOperations {
+    private int[] stack;
+    private int top;
+    private int maxSize;
+
+    public MyStack(int size) {
+        stack = new int[size];
+        top = -1;
+        maxSize = size;
+    }
+
+    public void push(int item) {
+        if (top == maxSize - 1) {
+            System.out.println("Stack Overflow");
+        } else {
+            stack[++top] = item;
+            System.out.println("Item pushed: " + item);
+        }
+    }
+
+    public int pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow");
+            return -1;
+        } else {
+            return stack[top--];
+        }
+    }
+
+    public void display() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+        } else {
+            System.out.println("Stack elements:");
+            for (int i = top; i >= 0; i--) {
+                System.out.println(stack[i]);
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the size of the stack: ");
+        int size = scanner.nextInt();
+
+        MyStack stack = new MyStack(size);
+
+        while (true) {
+            System.out.println("\nStack Operations Menu:");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Display");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the item to push: ");
+                    int item = scanner.nextInt();
+                    stack.push(item);
+                    break;
+                case 2:
+                    int poppedItem = stack.pop();
+                    if (poppedItem != -1) {
+                        System.out.println("Popped item: " + poppedItem);
+                    }
+                    break;
+                case 3:
+                    stack.display();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please enter a valid option.");
+            }
+        }
+    }
+}
+
+
+8.Create an interface “CreditCardInterface” with methods to viewCreditAmount, viewPin, changePin, useCard and payBalance. Create a class Customer (name, card number, pin, creditAmount – initialized to 0). Implement methods viewCreditAmount, viewPin, changePin and payBalance of the interface. From Customer, create classes RegularCardHolder (maxCreditLimit) and GoldCardHolder (String specialPrivileges) and define the remaining methods of the interface. Create n objects of the RegularCardHolder and GoldCardHolder classes and write a menu driven program to perform the following actions 1. Use Card 2. Pay Balance 3. Change Pin
+
+import java.util.Scanner;
+
+interface CreditCardInterface {
+    void viewCreditAmount();
+    void viewPin();
+    void changePin(int newPin);
+    void useCard(double amount);
+    void payBalance(double amount);
+}
+
+class Customer implements CreditCardInterface {
+    protected String name;
+    protected String cardNumber;
+    protected int pin;
+    protected double creditAmount;
+
+    public Customer(String name, String cardNumber, int pin) {
+        this.name = name;
+        this.cardNumber = cardNumber;
+        this.pin = pin;
+        this.creditAmount = 0;
+    }
+
+    public void viewCreditAmount() {
+        System.out.println("Credit Amount: " + creditAmount);
+    }
+
+    public void viewPin() {
+        System.out.println("PIN: " + pin);
+    }
+
+    public void changePin(int newPin) {
+        this.pin = newPin;
+        System.out.println("PIN changed successfully");
+    }
+
+    public void payBalance(double amount) {
+        if (amount > creditAmount) {
+            System.out.println("Amount exceeds the current credit balance");
+        } else {
+            creditAmount -= amount;
+            System.out.println("Balance paid successfully");
+        }
+    }
+
+    public void useCard(double amount) {
+    }
+}
+
+class RegularCardHolder extends Customer {
+    private double maxCreditLimit;
+
+    public RegularCardHolder(String name, String cardNumber, int pin, double maxCreditLimit) {
+        super(name, cardNumber, pin);
+        this.maxCreditLimit = maxCreditLimit;
+    }
+
+    public void useCard(double amount) {
+        if (creditAmount + amount > maxCreditLimit) {
+            System.out.println("Transaction exceeds max credit limit");
+        } else {
+            creditAmount += amount;
+            System.out.println("Transaction successful");
+        }
+    }
+}
+
+class GoldCardHolder extends Customer {
+    private String specialPrivileges;
+
+    public GoldCardHolder(String name, String cardNumber, int pin, String specialPrivileges) {
+        super(name, cardNumber, pin);
+        this.specialPrivileges = specialPrivileges;
+    }
+
+    public void useCard(double amount) {
+        creditAmount += amount;
+        System.out.println("Transaction successful");
+    }
+
+    public void viewSpecialPrivileges() {
+        System.out.println("Special Privileges: " + specialPrivileges);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of Regular Card Holders: ");
+        int nRegular = scanner.nextInt();
+        RegularCardHolder[] regularHolders = new RegularCardHolder[nRegular];
+        for (int i = 0; i < nRegular; i++) {
+            System.out.print("Enter name for Regular Card Holder " + (i + 1) + ": ");
+            String name = scanner.next();
+            System.out.print("Enter card number for Regular Card Holder " + (i + 1) + ": ");
+            String cardNumber = scanner.next();
+            System.out.print("Enter pin for Regular Card Holder " + (i + 1) + ": ");
+            int pin = scanner.nextInt();
+            System.out.print("Enter max credit limit for Regular Card Holder " + (i + 1) + ": ");
+            double maxCreditLimit = scanner.nextDouble();
+            regularHolders[i] = new RegularCardHolder(name, cardNumber, pin, maxCreditLimit);
+        }
+
+        System.out.print("Enter the number of Gold Card Holders: ");
+        int nGold = scanner.nextInt();
+        GoldCardHolder[] goldHolders = new GoldCardHolder[nGold];
+        for (int i = 0; i < nGold; i++) {
+            System.out.print("Enter name for Gold Card Holder " + (i + 1) + ": ");
+            String name = scanner.next();
+            System.out.print("Enter card number for Gold Card Holder " + (i + 1) + ": ");
+            String cardNumber = scanner.next();
+            System.out.print("Enter pin for Gold Card Holder " + (i + 1) + ": ");
+            int pin = scanner.nextInt();
+            System.out.print("Enter special privileges for Gold Card Holder " + (i + 1) + ": ");
+            String specialPrivileges = scanner.next();
+            goldHolders[i] = new GoldCardHolder(name, cardNumber, pin, specialPrivileges);
+        }
+
+        while (true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Use Card");
+            System.out.println("2. Pay Balance");
+            System.out.println("3. Change Pin");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            System.out.print("Enter card number: ");
+            String cardNumber = scanner.next();
+            Customer currentCustomer = null;
+
+            for (RegularCardHolder holder : regularHolders) {
+                if (holder.cardNumber.equals(cardNumber)) {
+                    currentCustomer = holder;
+                    break;
+                }
+            }
+            if (currentCustomer == null) {
+                for (GoldCardHolder holder : goldHolders) {
+                    if (holder.cardNumber.equals(cardNumber)) {
+                        currentCustomer = holder;
+                        break;
+                    }
+                }
+            }
+
+            if (currentCustomer == null) {
+                System.out.println("Card not found!");
+                continue;
+            }
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter amount to use: ");
+                    double useAmount = scanner.nextDouble();
+                    currentCustomer.useCard(useAmount);
+                    break;
+                case 2:
+                    System.out.print("Enter amount to pay: ");
+                    double payAmount = scanner.nextDouble();
+                    currentCustomer.payBalance(payAmount);
+                    break;
+                case 3:
+                    System.out.print("Enter new pin: ");
+                    int newPin = scanner.nextInt();
+                    currentCustomer.changePin(newPin);
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+}
+
+
+9.Define an interface “QueueOperations” which declares methods for a static queue. Define a class “MyQueue” which contains an array and front and rear as data members and implements the above interface. Initialize the queue using a constructor. Write a menu driven program to perform operations on a queue object.
+
+import java.util.Scanner;
+
+interface QueueOperations {
+    void enqueue(int item);
+    int dequeue();
+    void display();
+}
+
+class MyQueue implements QueueOperations {
+    private int[] queue;
+    private int front;
+    private int rear;
+    private int size;
+    private int capacity;
+
+    public MyQueue(int capacity) {
+        this.capacity = capacity;
+        queue = new int[capacity];
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    public void enqueue(int item) {
+        if (size == capacity) {
+            System.out.println("Queue Overflow");
+        } else {
+            rear = (rear + 1) % capacity;
+            queue[rear] = item;
+            size++;
+            System.out.println("Item enqueued: " + item);
+        }
+    }
+
+    public int dequeue() {
+        if (size == 0) {
+            System.out.println("Queue Underflow");
+            return -1;
+        } else {
+            int item = queue[front];
+            front = (front + 1) % capacity;
+            size--;
+            return item;
+        }
+    }
+
+    public void display() {
+        if (size == 0) {
+            System.out.println("Queue is empty");
+        } else {
+            System.out.println("Queue elements:");
+            for (int i = 0; i < size; i++) {
+                System.out.println(queue[(front + i) % capacity]);
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the size of the queue: ");
+        int size = scanner.nextInt();
+
+        MyQueue queue = new MyQueue(size);
+
+        while (true) {
+            System.out.println("\nQueue Operations Menu:");
+            System.out.println("1. Enqueue");
+            System.out.println("2. Dequeue");
+            System.out.println("3. Display");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the item to enqueue: ");
+                    int item = scanner.nextInt();
+                    queue.enqueue(item);
+                    break;
+                case 2:
+                    int dequeuedItem = queue.dequeue();
+                    if (dequeuedItem != -1) {
+                        System.out.println("Dequeued item: " + dequeuedItem);
+                    }
+                    break;
+                case 3:
+                    queue.display();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice! Please enter a valid option.");
+            }
+        }
+    }
+}
+***************************Multiple Inheritance*****************************
+
+
+1)
+interface AnimalEat {
+   void eat();
+}
+interface AnimalTravel {
+   void travel();
+}
+class Animal implements AnimalEat, AnimalTravel {
+   public void eat()
+ {
+      System.out.println("Animal is eating");
+   }
+   public void travel() {
+      System.out.println("Animal is travelling");
+   }
+}
+Animal a1=new Animal();
+A1.eat();
+A1.travel();
+
+
+
+2)
+interface Car
+{
+    int  speed=60; 
+public void distanceTravelled();
+}
+    
+interface Bus
+{
+    int distance=100;
+    public void speed();
+}
+public class Vehicle  implements Car,Bus
+{
+    int distanceTravelled;
+    int averageSpeed;
+    public void distanceTravelled()
+    {
+        distanceTravelled=speed*distance; 
+        System.out.println("Total Distance Travelled is : "+distanceTravelled);
+    }
+    public void speed()
+    {
+        int averageSpeed=distanceTravelled/speed;
+        System.out.println("Average Speed maintained is : "+averageSpeed);
+    }
+    public static void main(String args[])
+    {
+        Vehicle v1=new Vehicle();
+        v1.distanceTravelled();
+        v1.speed();
+    }
+}
+
+
+3) 
+interface PI1 
+{
+	void show()
+	{
+		System.out.println("Default PI1");
+	}
+}
+interface PI2
+ {
+	void show()
+	{
+		System.out.println("Default PI2");
+	}
+}
+
+class TestClass implements PI1, PI2 
+{
+
+		public void show()
+	{	
+		PI1.super.show();
+                  PI2.super.show();
+	}
+
+public static void main(String args[])
+	{
+		TestClass d = new TestClass();
+		d.show();
+	}
+}
+
+
+4)
+
+interface sal
+{
+	final double tax=0.05;
+	abstract void cal_sal();
+}
+class Employee
+{
+	int eid;
+	String name;
+	double bs;
+	void accept()
+	{
+	Scanner sc=new Scanner(System.in);	
+	}
+	void display()
+	{
+		
+	}
+}
+class emp_sal extends Employee implements sal
+{
+	double hra,ta,da,gs;	
+	public void cal_sal() 
+{
+		hra=bs*0.40;
+		da=bs*0.40;
+		ta=bs*0.40;
+		gs=(hra+ta+da+bs)-(bs*tax);
+		System.out.println("Hara"+hra);
+System.out.println("Ta"+ta);
+System.out.println("DA"+da);
+System.out.println("Tax"+tax);
+System.out.println("GS"+gs);
+	}}
+public class Multiple {
+
+	public static void main(String[] args)
+	{
+		emp_sal e1=new emp_sal();
+		e1.accept();
+		e1.display();
+		e1.cal_sal();
+
+	}
+
+}
+
+6)
+
+interface Marks {
+    void getMarks(int m1, int m2, int m3);
+    void showMarks();
+}
+
+class Student {
+    String name;
+    int rollNo;
+
+    public Student(String name, int rollNo) {
+        this.name = name;
+        this.rollNo = rollNo;
+    }
+
+    public void showStudentDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Roll No: " + rollNo);
+    }
+}
+
+class Result extends Student implements Marks {
+    int m1, m2, m3, total;
+    double percentage;
+
+    public Result(String name, int rollNo) {
+        super(name, rollNo);
+    }
+
+    public void getMarks(int m1, int m2, int m3) {
+        this.m1 = m1;
+        this.m2 = m2;
+        this.m3 = m3;
+        this.total = m1 + m2 + m3;
+        this.percentage = total / 3.0;
+    }
+
+    public void showMarks() {
+        System.out.println("Marks 1: " + m1);
+        System.out.println("Marks 2: " + m2);
+        System.out.println("Marks 3: " + m3);
+        System.out.println("Total Marks: " + total);
+        System.out.println("Percentage: " + percentage);
+    }
+
+    public void showGrade() {
+        System.out.print("Grade: ");
+        if (percentage >= 90) {
+            System.out.println("A");
+        } else if (percentage >= 75) {
+            System.out.println("B");
+        } else if (percentage >= 50) {
+            System.out.println("C");
+        } else {
+            System.out.println("D");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of students: ");
+        int n = scanner.nextInt();
+        scanner.nextLine();  
+
+        Result[] students = new Result[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for student " + (i + 1) + ":");
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Roll No: ");
+            int rollNo = scanner.nextInt();
+            System.out.print("Marks 1: ");
+            int m1 = scanner.nextInt();
+            System.out.print("Marks 2: ");
+            int m2 = scanner.nextInt();
+            System.out.print("Marks 3: ");
+            int m3 = scanner.nextInt();
+            scanner.nextLine();
+
+            students[i] = new Result(name, rollNo);
+            students[i].getMarks(m1, m2, m3);
+        }
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nDetails for student " + (i + 1) + ":");
+            students[i].showStudentDetails();
+            students[i].showMarks();
+            students[i].showGrade();
+        }
+
+        scanner.close();
+    }
+}
+

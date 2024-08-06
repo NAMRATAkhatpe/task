@@ -1,0 +1,721 @@
+import java.util.Scanner;
+class Employee 
+{	int eid;
+	String name;
+	double salary;
+	static int cnt;
+	Employee()//defualt constructor
+	{
+		cnt++;
+		eid=101;
+		name="Sam";
+		salary=9876.90;		
+	}
+	Employee(int eid,String name,double salary)//parameterized constuctor
+	{
+		cnt++;
+		this.eid=eid;
+		this.name=name;
+		this.salary=salary;
+	}	
+	void display()
+	{
+		System.out.println(eid+"\t"+name+"\t"+salary);		
+	}	
+	static void count()
+	{
+		System.out.println("No of object="+cnt);	
+	}	
+}
+public class static_demo 
+{
+
+	public static void main(String[] args) 
+	{
+		int eid,i;
+		String name;
+		double salary;
+		Scanner sc=new Scanner (System.in);
+		Employee e1=new Employee();
+		e1.display();
+		Employee.count();
+		System.out.println("Enter id ,name & salary");
+		eid=sc.nextInt();
+		name=sc.next();
+		salary=sc.nextDouble();
+		Employee e2=new Employee(eid,name,salary);
+		e2.display();
+		Employee.count();
+		System.out.println("Enter id ,name & salary");
+		eid=sc.nextInt();
+		name=sc.next();
+		salary=sc.nextDouble();
+		Employee e3=new Employee(eid,name,salary);
+		e3.display();
+		Employee.count();
+		
+	}
+}
+
+2)import java.util.*;
+class Student
+{
+	int rno;
+	String name;
+	float per;
+	static int cnt=0;
+	Student()
+	{
+		rno=0;
+		name="ABC";
+		per=0.0F;
+		cnt++;
+	}
+	Student(int rno,String name,int per)
+	{
+		this.rno=rno;
+		this.name=name;
+		this.per=per;
+		cnt++;
+	}
+	
+	void Display()
+	{
+		System.out.println("Roll No : "+rno+" Name : "+name+"Percentage : "+per);
+	}
+	
+	void accept()
+	{
+		Scanner scr=new Scanner(System.in);
+		System.out.println("Roll No : ");
+		rno=scr.nextInt();
+		System.out.println("Name : ");
+		name=scr.next();
+		System.out.println("Percentage : ");
+		per=scr.nextFloat();
+	}
+	
+	static void sortStud(Student[] D)
+	{
+	int i,j;
+	Student temp;
+	for(i=0;i<cnt;i++)
+        {
+		for(j=i+1;j<cnt;j++)
+        	{
+			if(D[i].per>D[j].per)
+			{
+			temp=D[i];
+			D[i]=D[j];
+			D[j]=temp;
+			}
+		}
+	}
+	}
+}
+	
+	class SortStud
+	{
+	
+	public static void main(String args[])
+	{
+		Scanner scr=new Scanner(System.in);
+		System.out.println("Enter How Many Students ? :");
+		int tot=scr.nextInt();
+		int i;
+		Student []D=new Student[tot];
+		for(i=0;i<tot;i++)
+		{
+		D[i]=new Student();
+		D[i].accept();
+		}
+		for(i=0;i<tot;i++)
+                		{
+		D[i].Display();
+		}
+		Student.sortStud(D);
+		System.out.println("After Sorting");
+		for(int i1=0;i1<tot;i1++)
+		{
+	        D[i1].Display();
+		}
+	}
+	
+}
+
+2.1)Sort student namewise
+
+import java.util.*;
+
+public class StudentSorter {
+
+    private static String[] studentNames = {"John", "Alice", "Bob", "Charlie", "David"};
+
+    public static void main(String[] args) {
+        System.out.println("Original array:");
+        printArray();
+
+        sortNames();
+
+        System.out.println("Sorted array:");
+        printArray();
+    }
+
+    public static void sortNames() {
+        Arrays.sort(studentNames);
+    }
+
+    public static void printArray() {
+        for (String name : studentNames) {
+            System.out.println(name);
+        }
+    }
+}
+
+
+2.2))Sort student id wise
+
+import java.util.*;
+
+public class StudentSorter {
+
+    private static Student[] students = {
+        new Student(103, "John"),
+        new Student(101, "Alice"),
+        new Student(104, "Bob"),
+        new Student(102, "Charlie"),
+        new Student(105, "David")
+    };
+
+    public static void main(String[] args) {
+        System.out.println("Original array:");
+        printArray();
+
+        sortStudentsById();
+
+        System.out.println("Sorted array by ID:");
+        printArray();
+    }
+
+    public static void sortStudentsById() {
+        Arrays.sort(students, (s1, s2) -> Integer.compare(s1.getId(), s2.getId()));
+    }
+
+    public static void printArray() {
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+
+    static class Student {
+        private int id;
+        private String name;
+
+        public Student(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return "ID: " + id + ", Name: " + name;
+        }
+    }
+}
+
+2.3)Sort student id wise in descending order
+
+import java.util.Arrays;
+
+public class StudentSorter {
+
+    private static Student[] students = {
+        new Student(103, "John"),
+        new Student(101, "Alice"),
+        new Student(104, "Bob"),
+        new Student(102, "Charlie"),
+        new Student(105, "David")
+    };
+
+    public static void main(String[] args) {
+        System.out.println("Original array:");
+        printArray();
+
+        sortStudentsByIdDescending();
+
+        System.out.println("Sorted array by ID (descending):");
+        printArray();
+    }
+
+    public static void sortStudentsByIdDescending() {
+        Arrays.sort(students, (s1, s2) -> Integer.compare(s2.getId(), s1.getId()));
+    }
+
+    public static void printArray() {
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+
+   
+    static class Student {
+        private int id;
+        private String name;
+
+        public Student(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        
+        public String toString() {
+            return "ID: " + id + ", Name: " + name;
+        }
+    }
+}
+
+
+3)Write a java program to accept the details of n Cricket Players from user 
+(Playercode, name, runs, innings-played and number of times not out ).
+(Use array of objects, Method overloading and static  keyword) 
+
+The program should contain following menus:
+-Display average runs of all players. 	
+-Display average runs of a single player.
+
+
+
+import java.util.Scanner;
+class Employee 
+{	int eid;
+	String name;
+	double salary;
+	static int cnt;
+	Employee()//defualt constructor
+	{
+		cnt++;
+		eid=101;
+		name="Sam";
+		salary=9876.90;		
+	}
+	Employee(int eid,String name,double salary)//parameterized constuctor
+	{
+		cnt++;
+		this.eid=eid;
+		this.name=name;
+		this.salary=salary;
+	}	
+	void display()
+	{
+		System.out.println(eid+"\t"+name+"\t"+salary);		
+	}	
+	static void count()
+	{
+		System.out.println("No of object="+cnt);	
+	}	
+}
+public class static_demo 
+{
+
+	public static void main(String[] args) 
+	{
+		int eid,i;
+		String name;
+		double salary;
+		Scanner sc=new Scanner (System.in);
+		Employee e1=new Employee();
+		e1.display();
+		Employee.count();
+		System.out.println("Enter id ,name & salary");
+		eid=sc.nextInt();
+		name=sc.next();
+		salary=sc.nextDouble();
+		Employee e2=new Employee(eid,name,salary);
+		e2.display();
+		Employee.count();
+		System.out.println("Enter id ,name & salary");
+		eid=sc.nextInt();
+		name=sc.next();
+		salary=sc.nextDouble();
+		Employee e3=new Employee(eid,name,salary);
+		e3.display();
+		Employee.count();
+		
+	}
+}
+
+2)import java.util.*;
+class Student
+{
+	int rno;
+	String name;
+	float per;
+	static int cnt=0;
+	Student()//default constructor
+	{
+		rno=0;
+		name="ABC";
+		per=0.0F;
+		cnt++;
+	}
+	Student(int rno,String name,int per)
+	{
+		this.rno=rno;
+		this.name=name;
+		this.per=per;
+		cnt++;
+	}
+	
+	void Display()
+	{
+		System.out.println("Roll No : "+rno+" Name : "+name+"Percentage : "+per);
+	}
+	
+	void accept()
+	{
+		Scanner scr=new Scanner(System.in);
+		System.out.println("Roll No : ");
+		rno=scr.nextInt();
+		System.out.println("Name : ");
+		name=scr.next();
+		System.out.println("Percentage : ");
+		per=scr.nextFloat();
+	}
+	
+	static void sortStud(Student[] D)
+	{
+	int i,j;
+	Student temp;
+	for(i=0;i<cnt;i++)
+        {
+		for(j=i+1;j<cnt;j++)
+        	{
+			if(D[i].per>D[j].per)
+			{
+			temp=D[i];
+			D[i]=D[j];
+			D[j]=temp;
+			}
+		}
+	}
+	}
+}
+	
+	class SortStud
+	{
+	
+	public static void main(String args[])
+	{
+		Scanner scr=new Scanner(System.in);
+		System.out.println("Enter How Many Students ? :");
+		int tot=scr.nextInt();
+		int i;
+		Student []D=new Student[tot];//array
+		for(i=0;i<tot;i++)
+		{
+		D[i]=new Student();//object
+		D[i].accept();
+		}
+		for(i=0;i<tot;i++)
+                		{
+		D[i].Display();
+		}
+		Student.sortStud(D);
+		System.out.println("After Sorting");
+		for(int i1=0;i1<tot;i1++)
+		{
+	        D[i1].Display();
+		}
+	}
+	
+}
+2.1)Sort student namewise
+2.2))Sort student id wise
+2.3)Sort student id wise in descending order
+
+3)Write a java program to accept the details of n Cricket Players from user 
+(Playercode, name, runs, innings-played and number of times not out ).
+(Use array of objects, Method overloading and static  keyword) 
+
+The program should contain following menus:
+-Display average runs of all players. 	
+-Display average runs of a single player. 
+
+
+import java.util.Scanner;
+
+class Cri_cket{
+    int player_no,no_of_innings,no_of_wickets,no_of_notouts,no_of_runs;
+    static double avgSum=0.0;
+    String player_name;
+    static int no_of_players=0;
+    double playerAvg=0.0;
+    Cri_cket(String player_name,int player_no,int no_of_innings,int no_of_notouts,int no_of_runs,int no_of_wickets){
+        this.player_name=player_name;
+        this.player_no=player_no;
+        this.no_of_innings=no_of_innings;
+        this.no_of_wickets=no_of_wickets;
+        this.no_of_notouts=no_of_notouts;
+        this.no_of_runs=no_of_runs;
+       cal_average();
+        no_of_players++;
+    }
+    void cal_average(){
+        if(no_of_notouts>=no_of_innings){
+            no_of_notouts=no_of_innings-1;
+        }
+        playerAvg=no_of_runs/(no_of_innings-no_of_notouts)*1.0;
+        System.out.println(player_no+"\t\t"+player_name+"\t\t"+playerAvg);
+    }
+    void display(){
+        System.out.println(player_no+"\t\t"+player_name+"\t\t"+no_of_innings+"\t\t"+no_of_notouts+"\t\t"+no_of_wickets+"\t\t"+no_of_runs);
+    }
+    
+    
+    static int display(Cri_cket[] D,int id)
+	{
+		for(int i=0;i<no_of_players;i++)
+        		{
+		
+			if(D[i].player_no==id)
+			{
+		         //System.out.println(player_no+"\t\t"+player_name+"\t\t"+no_of_innings+"\t\t"+no_of_notouts+"\t\t"+no_of_wickets+"\t\t"+no_of_runs);
+                 // System.out.println("\t\t"+playerAvg); 
+                return i;
+			}
+		
+		
+	
+		}
+			return -1;
+	}
+
+  
+    
+}
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter No. of Players : ");
+        int n=sc.nextInt();
+        int ch,i=0;
+        int player_no,no_of_innings,no_of_wickets,no_of_notouts,no_of_runs;
+        String player_name;
+        Cri_cket[] players=new Cri_cket[n];
+        do{
+            System.out.println("1) Add New Player\n2) Display \n3) dispaly single payer details\n4) Average of all the players \n5) Exit\n");
+            ch=sc.nextInt();
+            switch(ch){
+                case 1:
+                        for(i=0;i<n;i++)
+			{
+                            
+                            System.out.println("\nPlayer "+(i+1)+": \n");
+                            System.out.println("Enter Player Number : ");
+                            player_no=sc.nextInt();
+                            sc.nextLine();
+                            System.out.println("Enter Player Name : ");
+                            player_name=sc.nextLine();
+                            System.out.println("Enter Number of Innings : ");
+                            no_of_innings=sc.nextInt();
+                            System.out.println("Enter Number of Wickets : ");
+                            no_of_wickets=sc.nextInt();
+                            System.out.println("Enter Number of Notouts : ");
+                            no_of_notouts=sc.nextInt();
+                            System.out.println("Enter Runs Scored : ");
+                            no_of_runs=sc.nextInt();
+                            players[i]=new Cri_cket(player_name,player_no,no_of_innings,no_of_notouts,no_of_runs,no_of_wickets);
+                            
+                        }
+                        
+                        
+                    break;
+                case 2:
+                    System.out.println("Player Number\tPlayer Name\tNo. of Innings\tNo. of Not-outs\tno.of Wickets\tno. of Runs");
+                    for(int j=0;j<i;j++){
+                        players[j].display();
+                    }
+                    break;
+                case 3:
+                    System.out.println("Enter player id\n");
+                    int id=sc.nextInt();
+                     int j=Cri_cket.display(players,id);
+                    if(j!=-1)
+                       players[j].display();
+                    else
+                     System.out.println("Not found...!!!");
+                    
+                    break;
+                case 4:
+                    System.out.println("Player Number\tPlayer Name\tBatting Average");
+                    for(int j=0;j<i;j++){
+                        players[j].cal_average();
+                    }
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("Invalid Choice...!!!");
+                    break;
+            }
+        }while(ch!=5);
+        sc.close();
+    }
+}
+
+3.1)Write a java program to accept the details of n Cricket Players from user 
+(Playercode, name, runs, innings-played and number of times not out ,average).
+(Use array of objects, Method overloading and static  keyword) 
+
+The program should contain following menus:
+-Display average runs of all players. 	
+-Sort cricket player average wise. 
+-Sort cricket player name wise. 
+-Sort cricket player run wise. 
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class CricketPlayerStats {
+
+    static CricketPlayer[] players;
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        System.out.print("Enter the number of cricket players: ");
+        int n = scanner.nextInt();
+        players = new CricketPlayer[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for player " + (i + 1));
+            players[i] = new CricketPlayer();
+            players[i].acceptDetails();
+        }
+
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Display average runs of all players");
+            System.out.println("2. Sort cricket players by average runs");
+            System.out.println("3. Sort cricket players by name");
+            System.out.println("4. Sort cricket players by runs");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    displayAverageRuns();
+                    break;
+                case 2:
+                    sortPlayersByAverageRuns();
+                    displayPlayers();
+                    break;
+                case 3:
+                    sortPlayersByName();
+                    displayPlayers();
+                    break;
+                case 4:
+                    sortPlayersByRuns();
+                    displayPlayers();
+                    break;
+                case 5:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    public static void displayAverageRuns() {
+        for (CricketPlayer player : players) {
+            System.out.println("Player Code: " + player.getPlayerCode() + ", Average Runs: " + player.calculateAverageRuns());
+        }
+    }
+
+    public static void sortPlayersByAverageRuns() {
+        Arrays.sort(players, (p1, p2) -> Double.compare(p2.calculateAverageRuns(), p1.calculateAverageRuns()));
+    }
+
+    public static void sortPlayersByName() {
+        Arrays.sort(players, (p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
+    }
+
+    public static void sortPlayersByRuns() {
+        Arrays.sort(players, (p1, p2) -> Integer.compare(p2.getRuns(), p1.getRuns()));
+    }
+
+    public static void displayPlayers() {
+        for (CricketPlayer player : players) {
+            System.out.println(player);
+        }
+    }
+}
+
+class CricketPlayer {
+    private int playerCode;
+    private String name;
+    private int runs;
+    private int inningsPlayed;
+    private int timesNotOut;
+    static Scanner scanner = new Scanner(System.in);
+
+    public void acceptDetails() {
+        System.out.print("Enter player code: ");
+        playerCode = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter player name: ");
+        name = scanner.nextLine();
+        System.out.print("Enter runs: ");
+        runs = scanner.nextInt();
+        System.out.print("Enter innings played: ");
+        inningsPlayed = scanner.nextInt();
+        System.out.print("Enter number of times not out: ");
+        timesNotOut = scanner.nextInt();
+    }
+
+    public int getPlayerCode() {
+        return playerCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getRuns() {
+        return runs;
+    }
+
+    public double calculateAverageRuns() {
+        int innings = inningsPlayed - timesNotOut;
+        if (innings == 0) {
+            return 0.0;
+        }
+        return (double) runs / innings;
+    }
+
+    @Override
+    public String toString() {
+        return "Player Code: " + playerCode + ", Name: " + name + ", Runs: " + runs + ", Innings Played: " + inningsPlayed + ", Times Not Out: " + timesNotOut + ", Average Runs: " + calculateAverageRuns();
+    }
+}
+
